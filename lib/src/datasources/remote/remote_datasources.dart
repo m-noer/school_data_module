@@ -1,3 +1,4 @@
+import 'package:core_module/core_module.dart';
 import 'package:school_data_module/src/models/login_model.dart';
 import 'package:school_domain_module/school_domain_module.dart';
 import 'package:dio/dio.dart';
@@ -13,10 +14,14 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
   @override
   Future<LoginEntity> requestLogin(LoginBodyEntity body) async {
-    final response = await _client.post(
-      "auth/login",
-      data: body.toJson(),
-    );
-    return LoginModel.fromJson(response.data);
+    try {
+      final response = await _client.post(
+        "auth/login",
+        data: body.toJson(),
+      );
+      return LoginModel.fromJson(response.data);
+    } on DioError {
+      throw ServerException();
+    }
   }
 }
