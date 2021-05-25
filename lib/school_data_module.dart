@@ -1,7 +1,6 @@
 library school_data_module;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export '././src/datasources/datasoures.dart';
+export '././src/di/injection_container.dart';
+export '././src/models/model.dart';
+export '././src/repositories/repository_impl.dart';
